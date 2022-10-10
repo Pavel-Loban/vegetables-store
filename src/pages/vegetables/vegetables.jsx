@@ -4,6 +4,7 @@ import axios from 'axios'
 import { Container } from '@mui/system'
 import Cards from '../../Components/_common/Cards/Cards'
 import { useNavigate} from 'react-router';
+import SceletonCard from '../../Components/_common/Cards/sceletonCard';
 
 const Vegetables = () => {
 
@@ -12,6 +13,7 @@ const Vegetables = () => {
   const [error, setError] = useState(null)
 
   const [vegetables, setVegetables] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
 
   const navigate = useNavigate();
 
@@ -25,7 +27,10 @@ const Vegetables = () => {
     axios
       .get(newArr)
       .then((res) => {
-        setVegetables(res.data[0].vegetables)
+        setVegetables(res.data[0].vegetables);
+        setTimeout(() => {
+          setIsLoading(false)
+        }, 500)
         // console.log(res.data[0].vegetables)
       })
       .catch((error) => {
@@ -45,11 +50,14 @@ const Vegetables = () => {
                 </Typography>
               </Container>
               <Grid container spacing={2}>
-                {vegetables.map((item) => {
+              {isLoading ? [...new Array(6)].map((item, i) => <SceletonCard key={i} /> )
+        : vegetables.map((item) => <Cards {...item} key={item.id} toItem={toItem} />
+        )}
+                {/* {vegetables.map((item) => {
                     return (<Cards {...item} key={item.id}
                   toItem={ toItem}
                   /> )
-                })}
+                })} */}
               </Grid>
             </div>
           )

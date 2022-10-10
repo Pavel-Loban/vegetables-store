@@ -24,7 +24,7 @@ function App() {
     <Router>
       <div className="App">
         {/* <div> */}
-         <Navigation/>
+         <Navigation />
         {/* <SubNavigation/>  */}
         {/* <NavBar/> */}
       <div className='content'>

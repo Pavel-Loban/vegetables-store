@@ -4,11 +4,13 @@ import { Grid, Typography } from '@mui/material'
 import { Container } from '@mui/system'
 import Cards from '../../Components/_common/Cards/Cards';
 import { useNavigate} from 'react-router';
+import SceletonCard from '../../Components/_common/Cards/sceletonCard';
 
 const Beverage = () => {
   const newArr = 'https://63374daf132b46ee0be02302.mockapi.io/items'
   const [beverage, setBeverage] = useState(null);
   const [error, setError] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
 
   const navigate = useNavigate();
 
@@ -23,6 +25,9 @@ const Beverage = () => {
       .get(newArr)
       .then((res) => {
         setBeverage(res.data[0].beverage)
+        setTimeout(() => {
+          setIsLoading(false)
+        }, 500)
         // console.log(res.data[0].beverage)
       })
       .catch((error) => {
@@ -41,10 +46,13 @@ const Beverage = () => {
           </Typography>
         </Container>
         <Grid container spacing={2}>
-          {beverage.map((item) => {
+          {isLoading ? [...new Array(6)].map((item, i) => <SceletonCard key={i} /> )
+        : beverage.map((item) => <Cards {...item} key={item.id} toItem={toItem} />
+        )}
+          {/* {beverage.map((item) => {
             return <Cards {...item} key={item.id} toItem={toItem} />
 
-          })}
+          })} */}
         </Grid>
       </div>
     )

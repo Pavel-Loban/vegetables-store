@@ -4,12 +4,13 @@ import axios from 'axios'
 import { Container } from '@mui/system'
 import Cards from '../../Components/_common/Cards/Cards'
 import { useNavigate} from 'react-router';
+import SceletonCard from '../../Components/_common/Cards/sceletonCard';
 
 const EggsDairy = () => {
     const newArr = 'https://63374daf132b46ee0be02302.mockapi.io/eggs';
 
   const [error, setError] = useState(null);
-
+  const [isLoading, setIsLoading] = useState(true);
   const [eggs, setEggs] = useState(null);
 
   const navigate = useNavigate();
@@ -30,7 +31,10 @@ const EggsDairy = () => {
     axios
       .get(newArr)
       .then((res) => {
-        setEggs(res.data[0].eggs)
+        setEggs(res.data[0].eggs);
+        setTimeout(() => {
+          setIsLoading(false)
+        }, 500)
         // console.log(res.data[0].eggs)
       })
       .catch((error) => {
@@ -52,13 +56,16 @@ const EggsDairy = () => {
                 </Typography>
               </Container>
               <Grid container spacing={2}>
-                {!!eggs.length && eggs.map((item) => {
+              {isLoading ? [...new Array(6)].map((item, i) => <SceletonCard key={i} /> )
+        : eggs.map((item) => <Cards {...item} key={item.id} toItem={toItem} />
+        )}
+                {/* {!!eggs.length && eggs.map((item) => {
                     return (<Cards {...item} key={item.id}
                 //   getItem={getItem}
                 // onClick={() => toItem(item.id)}
                 toItem={ toItem}
                   /> )
-                })}
+                })} */}
               </Grid>
             </div>
           )

@@ -4,6 +4,7 @@ import { Card, CardContent, CardMedia, Grid, Typography, Button } from '@mui/mat
 import { Container } from '@mui/system'
 import Cards from '../../Components/_common/Cards/Cards'
 import { useNavigate} from 'react-router';
+import SceletonCard from '../../Components/_common/Cards/sceletonCard';
 
 import './nuts.scss'
 
@@ -14,6 +15,7 @@ const Nuts = () => {
   const [error, setError] = useState(null);
 
   const [nuts, setNuts] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
 
   const navigate = useNavigate();
 
@@ -27,7 +29,10 @@ const Nuts = () => {
     axios
       .get(newArr)
       .then((res) => {
-        setNuts(res.data[0].nuts)
+        setNuts(res.data[0].nuts);
+        setTimeout(() => {
+          setIsLoading(false)
+        }, 500)
         // console.log(res.data[0].nuts)
       })
       .catch((error) => {
@@ -49,11 +54,14 @@ const Nuts = () => {
           </Typography>
         </Container>
         <Grid container spacing={2}>
-          {nuts.map((item) => {
+        {isLoading ? [...new Array(6)].map((item, i) => <SceletonCard key={i} /> )
+        : nuts.map((item) => <Cards {...item} key={item.id} toItem={toItem} />
+        )}
+          {/* {nuts.map((item) => {
                     return (<Cards {...item} key={item.id}
                   toItem={toItem}
                   /> )
-                })}
+                })} */}
         </Grid>
       </div>
       </div>
