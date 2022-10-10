@@ -1,8 +1,8 @@
 import React from 'react';
 import styles from './navBar.module.scss'
 import MenuIcon from '@mui/icons-material/Menu';
-import cart from '../../assets/img/imageNavigation/cart.svg';
-import vector from '../../assets/img/imageNavigation/Vector.svg';
+import cart from '../../../assets/img/imageNavigation/cart.svg';
+import vector from '../../../assets/img/imageNavigation/Vector.svg';
 import { Link } from 'react-router-dom';
 import Button from '@mui/material/Button';
 
@@ -14,9 +14,9 @@ const NavBar = () => {
 
     const [select,setSelect] = React.useState(0);
 
-    const menuListVisible = ['популярности','цене','алфавиту'];
+    const menuListVisible = ['popularity','price','alphabet'];
     const navigation = ['HOME','PRODUCT','STORES','CONTACT'];
-    const linkTo = ["/","/apple","/apricot","/beverage"];
+    const linkTo = ["/","/product","/stores","/contact"];
 
 
 
@@ -71,7 +71,6 @@ const NavBar = () => {
 
         <Button variant="contained" className={styles.btnCart}>
              <img src={cart} />
-            {/* <span>CART 2</span> */}
             Cart 2
             <img src={vector} />
         </Button>

@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from 'react'
-import { Card, CardContent, CardMedia, Grid, Typography, Button } from '@mui/material'
+import {Grid, Typography} from '@mui/material'
 import axios from 'axios'
 import { Container } from '@mui/system'
-import Buttons from '../../Components/Buttons/Buttons'
 import Cards from '../../Components/_common/Cards/Cards'
-
+import { useNavigate} from 'react-router';
 
 const Vegetables = () => {
 
@@ -12,14 +11,22 @@ const Vegetables = () => {
 
   const [error, setError] = useState(null)
 
-  const [vegetable, setVegetable] = useState(null)
+  const [vegetables, setVegetables] = useState(null);
+
+  const navigate = useNavigate();
+
+  const link = '/vegetables';
+
+  const toItem = (id) => {
+    navigate(`${link}/${id}`)
+  }
 
   useEffect(() => {
     axios
       .get(newArr)
       .then((res) => {
-        setVegetable(res.data[0].vegetables)
-        console.log(res.data[0].vegetables)
+        setVegetables(res.data[0].vegetables)
+        // console.log(res.data[0].vegetables)
       })
       .catch((error) => {
         setError(error)
@@ -29,7 +36,7 @@ const Vegetables = () => {
   if (error) return `Error: ${error.message}`
 
 
-    return !! vegetable && (
+    return !! vegetables && (
         (
              <div>
               <Container sx={{pb:2}}>
@@ -38,9 +45,9 @@ const Vegetables = () => {
                 </Typography>
               </Container>
               <Grid container spacing={2}>
-                {vegetable.map((item) => {
+                {vegetables.map((item) => {
                     return (<Cards {...item} key={item.id}
-                  // getItem={getItem}
+                  toItem={ toItem}
                   /> )
                 })}
               </Grid>

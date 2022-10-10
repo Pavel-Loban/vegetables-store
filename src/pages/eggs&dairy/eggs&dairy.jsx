@@ -14,8 +14,10 @@ const EggsDairy = () => {
 
   const navigate = useNavigate();
 
+  const link = '/eggs&dairy';
+
   const toItem = (id) => {
-    navigate(`/eggs&dairy/${id}`)
+    navigate(`${link}/${id}`)
   }
 
 //   const getItem = (arr,id) => {

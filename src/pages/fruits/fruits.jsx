@@ -4,7 +4,8 @@ import axios from 'axios'
 import { Container } from '@mui/system'
 import Buttons from '../../Components/Buttons/Buttons'
 import heart from '../../assets/img/card/heart.svg'
-import Cards from '../../Components/_common/Cards/Cards'
+import Cards from '../../Components/_common/Cards/Cards';
+import { useNavigate} from 'react-router';
 
 const Fruits = () => {
 
@@ -14,6 +15,14 @@ const Fruits = () => {
   const [error, setError] = useState(null);
 
   const [fruits, setFruits] = useState(null);
+
+  const navigate = useNavigate();
+
+  const link = '/fruits';
+
+  const toItem = (id) => {
+    navigate(`${link}/${id}`)
+  }
 
   useEffect(() => {
     axios
@@ -43,7 +52,7 @@ const Fruits = () => {
               <Grid container spacing={2}>
                 {fruits.map((item) => {
                     return (<Cards {...item} key={item.id}
-                  // getItem={getItem}
+                      toItem={toItem}
                   /> )
                 })}
                </Grid>

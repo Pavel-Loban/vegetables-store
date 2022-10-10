@@ -3,6 +3,7 @@ import axios from 'axios'
 import { Card, CardContent, CardMedia, Grid, Typography, Button } from '@mui/material'
 import { Container } from '@mui/system'
 import Cards from '../../Components/_common/Cards/Cards'
+import { useNavigate} from 'react-router';
 
 import './nuts.scss'
 
@@ -10,16 +11,24 @@ const Nuts = () => {
 
   const newArr = 'https://63374daf132b46ee0be02302.mockapi.io/items';
 
-  const [error, setError] = useState(null)
+  const [error, setError] = useState(null);
 
-  const [nuts, setNuts] = useState(null)
+  const [nuts, setNuts] = useState(null);
+
+  const navigate = useNavigate();
+
+  const link = '/nuts';
+
+  const toItem = (id) => {
+    navigate(`${link}/${id}`)
+  }
 
   useEffect(() => {
     axios
       .get(newArr)
       .then((res) => {
         setNuts(res.data[0].nuts)
-        console.log(res.data[0].nuts)
+        // console.log(res.data[0].nuts)
       })
       .catch((error) => {
         setError(error)
@@ -42,7 +51,7 @@ const Nuts = () => {
         <Grid container spacing={2}>
           {nuts.map((item) => {
                     return (<Cards {...item} key={item.id}
-                  // getItem={getItem}
+                  toItem={toItem}
                   /> )
                 })}
         </Grid>

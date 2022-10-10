@@ -3,10 +3,8 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-d
 
 import './App.scss';
 import Footer from "./Components/Footer/Footer";
-import Header from "./Components/Header/Header";
-import NavBar from "./Components/NavBar/NavBar";
 import Navigation from "./Components/Navigation/Navigation";
-import SubNavigation from "./Components/SubNavigation/SubNavigation";
+
 import Nuts from "./pages/nuts/nuts";
 import Vegetables from "./pages/vegetables/vegetables";
 import Home from "./pages/home/home";
@@ -15,6 +13,10 @@ import Beverage from "./pages/beverage/beverage";
 import EggsDairy from "./pages/eggs&dairy/eggs&dairy";
 import EggsDairyItem from "./pages/eggs&dairy/eggsDairyItem/eggsDairyItem";
 import PageNotFound from "./pages/pageNotFound/pageNotFound";
+import VegetablesItem from "./pages/vegetables/vegetableItem/vegetablesItem";
+import NutItem from "./pages/nuts/nutItem/nutItem";
+import BeverageItem from "./pages/beverage/beverageItem/beverageItem";
+import FruitItem from "./pages/fruits/fruitItem/fruitItem";
 
 
 function App() {
@@ -22,18 +24,24 @@ function App() {
     <Router>
       <div className="App">
         {/* <div> */}
-        <Navigation/>
-        <SubNavigation/>
-        <NavBar/>
-        {/* <Home /> */}
-      {/* <Header /> */}
+         <Navigation/>
+        {/* <SubNavigation/>  */}
+        {/* <NavBar/> */}
       <div className='content'>
       <Routes >
         <Route path="/" element={<Home /> }  />
         <Route path="/nuts" element={<Nuts /> } />
+        <Route path="/nuts/:id" element={<NutItem /> } />
+
         <Route path="/vegetables" element={<Vegetables  /> } />
+        <Route path="/vegetables/:id" element={<VegetablesItem /> } />
+
         <Route path="/fruits" element={<Fruits  /> } />
-        <Route path="/beverage" element={<Beverage  /> } />
+        <Route path="/fruits/:id" element={<FruitItem /> } />
+
+        <Route path="/beverages" element={<Beverage  /> } />
+        <Route path="/beverages/:id" element={<BeverageItem /> } />
+
         <Route path="/eggs&dairy" element={<EggsDairy  /> } />
         <Route path="/eggs&dairy/:id" element={<EggsDairyItem /> } />
         <Route path="/404" element={<PageNotFound /> } />

@@ -19,7 +19,7 @@ const Carusel = () => {
       discount: 6,
       srcImg: beverage,
       count: 1,
-      link: "/beverage"
+      link: "/beverages"
     },
     {
       title: 'Nuts & Snacks',
