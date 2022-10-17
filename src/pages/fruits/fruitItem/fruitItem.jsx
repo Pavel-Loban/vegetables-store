@@ -24,7 +24,7 @@ const FruitItem = () => {
     axios
       .get(newArr)
       .then((res) => {
-        setFruits(res.data[0].fruits);
+        setFruits(res.data);
         // console.log(res.data[0].vegetables)''
       })
       .catch((error) => {

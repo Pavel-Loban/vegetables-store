@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from './navBar.module.scss'
-import MenuIcon from '@mui/icons-material/Menu';
+
 import cart from '../../../assets/img/imageNavigation/cart.svg';
 import vector from '../../../assets/img/imageNavigation/Vector.svg';
 import { Link } from 'react-router-dom';
@@ -8,23 +8,23 @@ import Button from '@mui/material/Button';
 
 const NavBar = () => {
 
-    const [isVisible,setIsVisible] = React.useState(false);
-    const [selected,setSelected] = React.useState(0);
+    // const [isVisible,setIsVisible] = React.useState(false);
+
     const [toLink,setToLink] = React.useState(0);
 
     const [select,setSelect] = React.useState(0);
-
-    const menuListVisible = ['popularity','price','alphabet'];
+    // const [selected,setSelected] = React.useState(0);
+    // const menuListVisible = ['popularity','price','alphabet'];
     const navigation = ['HOME','PRODUCT','STORES','CONTACT'];
     const linkTo = ["/","/product","/stores","/contact"];
 
 
 
-    const onSelected = (id) => {
-      setSelected(id);
-      setIsVisible(!isVisible);
-      console.log(id)
-    }
+    // const onSelected = (id) => {
+    //   setSelected(id);
+    //   setIsVisible(!isVisible);
+    //   console.log(id)
+    // }
 
     localStorage.setItem("key", toLink)
 
@@ -36,7 +36,7 @@ const NavBar = () => {
 
     return (
         <div className={styles.sort}>
-            <div className={styles.selectNav}>
+            {/* <div className={styles.selectNav}>
             <div className={styles.sort__label} onClick={onSelect}>
             <MenuIcon  />
           <b>Select Categories:</b>
@@ -54,7 +54,9 @@ const NavBar = () => {
          </ul>
        </div>
        )}
-       <div className={styles.navList} >
+            </div> */}
+
+            <div className={styles.navList} >
             <ul>
                 {navigation.map((item,i) => (
                   <Link to={linkTo[i]} key={i} >  <li key={i}  className={select === i ? styles.textColor  : ''}
@@ -65,15 +67,13 @@ const NavBar = () => {
                 )}
             </ul>
         </div>
-
-            </div>
-
-
+        <Link to={'/shoppingCart'}>
         <Button variant="contained" className={styles.btnCart}>
              <img src={cart} />
             Cart 2
             <img src={vector} />
         </Button>
+        </Link>
       </div>
     );
 };

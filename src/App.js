@@ -17,6 +17,7 @@ import VegetablesItem from "./pages/vegetables/vegetableItem/vegetablesItem";
 import NutItem from "./pages/nuts/nutItem/nutItem";
 import BeverageItem from "./pages/beverage/beverageItem/beverageItem";
 import FruitItem from "./pages/fruits/fruitItem/fruitItem";
+import ShoppingCart from "./Components/ShoppingCart/ShoppingCart";
 
 
 function App() {
@@ -25,8 +26,6 @@ function App() {
       <div className="App">
         {/* <div> */}
          <Navigation />
-        {/* <SubNavigation/>  */}
-        {/* <NavBar/> */}
       <div className='content'>
       <Routes >
         <Route path="/" element={<Home /> }  />
@@ -46,6 +45,7 @@ function App() {
         <Route path="/eggs&dairy/:id" element={<EggsDairyItem /> } />
         <Route path="/404" element={<PageNotFound /> } />
         <Route path="*" element={<Navigate replace to='/404' /> } />
+        <Route path="/shoppingCart" element={<ShoppingCart  /> } />
       </Routes>
       </div>
       <Footer/>

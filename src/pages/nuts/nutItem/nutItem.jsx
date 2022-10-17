@@ -12,7 +12,7 @@ const NutItem = () => {
         navigate('/nuts');
     }
 
-    const newArr = 'https://63374daf132b46ee0be02302.mockapi.io/items';
+    const newArr = 'https://63374daf132b46ee0be02302.mockapi.io/nuts';
 
   const [error, setError] = useState(null);
 
@@ -22,7 +22,7 @@ const NutItem = () => {
     axios
       .get(newArr)
       .then((res) => {
-        setNuts(res.data[0].nuts);
+        setNuts(res.data);
         // console.log(res.data[0].vegetables)''
       })
       .catch((error) => {

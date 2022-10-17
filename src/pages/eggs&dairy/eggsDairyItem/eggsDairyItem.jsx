@@ -23,7 +23,7 @@ const EggsDairyItem = () => {
     axios
       .get(newArr)
       .then((res) => {
-        setEggs(res.data[0].eggs)
+        setEggs(res.data)
         // console.log(res.data[0].eggs)
       })
       .catch((error) => {
@@ -31,13 +31,7 @@ const EggsDairyItem = () => {
       })
   }, []);
 
-
-
   if (error) return `Error: ${error.message}`
-
-
-
-
 
     return !!eggs && (
        (<div>

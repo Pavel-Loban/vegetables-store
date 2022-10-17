@@ -5,26 +5,29 @@ import { Container } from '@mui/system'
 import Cards from '../../Components/_common/Cards/Cards';
 import { useNavigate} from 'react-router';
 import SceletonCard from '../../Components/_common/Cards/sceletonCard';
+import Categories from '../../Components/Categories/Categories'
 
-const Beverage = () => {
-  const newArr = 'https://63374daf132b46ee0be02302.mockapi.io/items'
-  const [beverage, setBeverage] = useState(null);
+import {connect} from 'react-redux'
+import {beveragesLoaded, addedBeveragesInCart, removeBeveragesInCart} from '../../actions'
+
+const Beverage = ({beverages, beveragesLoaded, addedBeveragesInCart, removeBeveragesInCart}) => {
+  const newArr = 'https://63374daf132b46ee0be02302.mockapi.io/fruits'
+  // const [beverage, setBeverage] = useState(null);
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
 
   const navigate = useNavigate();
 
-  const link = '/beverages';
-
   const toItem = (id) => {
-    navigate(`${link}/${id}`)
+    navigate(`/beverages/${id}`)
   }
 
   useEffect(() => {
     axios
       .get(newArr)
       .then((res) => {
-        setBeverage(res.data[0].beverage)
+        // setBeverage(res.data)
+        beveragesLoaded(res.data)
         setTimeout(() => {
           setIsLoading(false)
         }, 500)
@@ -38,16 +41,17 @@ const Beverage = () => {
   if (error) return `Error: ${error.message}`
 
   return (
-    !!beverage && (
+    !!beverages && (
       <div>
         <Container sx={{ pb: 2 }}>
+          <Categories/>
           <Typography variant="h2" component="h6" sx={{ textAlign: 'center' }}>
             Beverage
           </Typography>
         </Container>
         <Grid container spacing={2}>
           {isLoading ? [...new Array(6)].map((item, i) => <SceletonCard key={i} /> )
-        : beverage.map((item) => <Cards {...item} key={item.id} toItem={toItem} />
+        : beverages.map((item) => <Cards item={item} key={item.id} toItem={toItem} addedBeveragesInCart={addedBeveragesInCart} removeBeveragesInCart={removeBeveragesInCart} />
         )}
           {/* {beverage.map((item) => {
             return <Cards {...item} key={item.id} toItem={toItem} />
@@ -57,6 +61,16 @@ const Beverage = () => {
       </div>
     )
   )
+};
+
+const mapStateToProps = ({beverage:{beverages}}) => {
+  return {beverages }
 }
 
-export default Beverage
+const mapDispatchToProps =  {
+  beveragesLoaded,
+  addedBeveragesInCart,
+  removeBeveragesInCart
+}
+
+export default connect(mapStateToProps,mapDispatchToProps) (Beverage)

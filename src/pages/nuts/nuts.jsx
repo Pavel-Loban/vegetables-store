@@ -8,28 +8,29 @@ import SceletonCard from '../../Components/_common/Cards/sceletonCard';
 
 import './nuts.scss'
 
-const Nuts = () => {
+import {connect} from 'react-redux'
+import {nutsLoaded,addedBeveragesInCart} from '../../actions'
 
-  const newArr = 'https://63374daf132b46ee0be02302.mockapi.io/items';
+const Nuts = ({nuts,nutsLoaded, addedBeveragesInCart}) => {
+
+  const newArr = 'https://63374daf132b46ee0be02302.mockapi.io/nuts';
 
   const [error, setError] = useState(null);
 
-  const [nuts, setNuts] = useState(null);
+  // const [nuts, setNuts] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
 
   const navigate = useNavigate();
 
-  const link = '/nuts';
-
   const toItem = (id) => {
-    navigate(`${link}/${id}`)
+    navigate(`/nuts/${id}`)
   }
 
   useEffect(() => {
     axios
       .get(newArr)
       .then((res) => {
-        setNuts(res.data[0].nuts);
+        nutsLoaded(res.data);
         setTimeout(() => {
           setIsLoading(false)
         }, 500)
@@ -55,7 +56,7 @@ const Nuts = () => {
         </Container>
         <Grid container spacing={2}>
         {isLoading ? [...new Array(6)].map((item, i) => <SceletonCard key={i} /> )
-        : nuts.map((item) => <Cards {...item} key={item.id} toItem={toItem} />
+        : nuts.map((item) => <Cards item={item} key={item.id} toItem={toItem} addedBeveragesInCart={addedBeveragesInCart} />
         )}
           {/* {nuts.map((item) => {
                     return (<Cards {...item} key={item.id}
@@ -69,4 +70,14 @@ const Nuts = () => {
   )
 }
 
-export default Nuts
+const mapStateToProps = ({nut:{nuts}}) => {
+  return {nuts }
+}
+
+const mapDispatchToProps =  {
+  nutsLoaded,
+  addedBeveragesInCart
+  // removeBeveragesInCart
+}
+
+export default connect(mapStateToProps,mapDispatchToProps) (Nuts)

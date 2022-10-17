@@ -13,7 +13,7 @@ const VegetablesItem = () => {
         navigate('/vegetables');
     }
 
-    const newArr = 'https://63374daf132b46ee0be02302.mockapi.io/vegetables';
+    const newArr = 'https://63374daf132b46ee0be02302.mockapi.io/nuts';
 
   const [error, setError] = useState(null);
 
@@ -23,7 +23,7 @@ const VegetablesItem = () => {
     axios
       .get(newArr)
       .then((res) => {
-        setVegetable(res.data[0].vegetables);
+        setVegetable(res.data);
         // console.log(res.data[0].vegetables)''
       })
       .catch((error) => {

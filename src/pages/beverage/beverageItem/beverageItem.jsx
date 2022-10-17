@@ -14,7 +14,7 @@ const BeverageItem = () => {
         navigate('/beverages');
     }
 
-    const newArr = 'https://63374daf132b46ee0be02302.mockapi.io/items';
+    const newArr = 'https://63374daf132b46ee0be02302.mockapi.io/fruits';
 
   const [error, setError] = useState(null);
 
@@ -24,7 +24,7 @@ const BeverageItem = () => {
     axios
       .get(newArr)
       .then((res) => {
-        setBeverages(res.data[0].beverage);
+        setBeverages(res.data);
         // console.log(res.data[0].vegetables)''
       })
       .catch((error) => {

@@ -8,7 +8,7 @@ import SceletonCard from '../../Components/_common/Cards/sceletonCard';
 
 const Vegetables = () => {
 
-    const newArr = 'https://63374daf132b46ee0be02302.mockapi.io/vegetables';
+    const newArr = 'https://63374daf132b46ee0be02302.mockapi.io/nuts';
 
   const [error, setError] = useState(null)
 
@@ -27,7 +27,7 @@ const Vegetables = () => {
     axios
       .get(newArr)
       .then((res) => {
-        setVegetables(res.data[0].vegetables);
+        setVegetables(res.data);
         setTimeout(() => {
           setIsLoading(false)
         }, 500)
@@ -51,7 +51,7 @@ const Vegetables = () => {
               </Container>
               <Grid container spacing={2}>
               {isLoading ? [...new Array(6)].map((item, i) => <SceletonCard key={i} /> )
-        : vegetables.map((item) => <Cards {...item} key={item.id} toItem={toItem} />
+        : vegetables.map((item) => <Cards item={item} key={item.id} toItem={toItem} />
         )}
                 {/* {vegetables.map((item) => {
                     return (<Cards {...item} key={item.id}

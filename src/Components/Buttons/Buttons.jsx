@@ -2,7 +2,7 @@ import React from 'react';
 import {Typography, Button } from '@mui/material'
 
 
-const Buttons = ({price}) => {
+const Buttons = ({id,price, addedBeveragesInCart}) => {
 
     const [count, setCount] = React.useState(0);
 
@@ -54,7 +54,7 @@ const Buttons = ({price}) => {
         height: 25,
         padding: 0
         }}
-        onClick={addProducts}
+        onClick={() => addedBeveragesInCart(id)}
         >add</Button>
       </div>
 

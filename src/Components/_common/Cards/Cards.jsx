@@ -8,8 +8,8 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import { createTheme } from '@mui/material/styles';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 
-const Cards = ({id,title,imgSrc,price,toItem}) => {
-
+const Cards = ({item,toItem, addedBeveragesInCart}) => {
+const {id,title,imgSrc,price} = item;
 
   // const link = 'eggs&dairy';
   const [hearts,setHearts] = React.useState(true);
@@ -36,13 +36,13 @@ const Cards = ({id,title,imgSrc,price,toItem}) => {
   }
     return (
         <>
-                  <Grid item xs={12} sm={6} md={4} key={id}>
+                  <Grid item xs={12} sm={6} md={4} key={item.id}>
                     <Card sx={{ margin: '0 auto',  width: 300 }}>
                       <CardMedia
-                        image={imgSrc}
+                        image={item.imgSrc}
                         component='img'
-                        alt={title}
-                        title={title}
+                        alt={item.title}
+                        title={item.title}
                         sx={{ height: 200 }}
                         // onClick={() => getItem(link,id)}
                         // getItem={getItem}
@@ -54,10 +54,10 @@ const Cards = ({id,title,imgSrc,price,toItem}) => {
                       <Typography
                         variant='h6'
                         component='h3'
-                        >{title}</Typography>
+                        >{item.title}</Typography>
                         <Typography
                         variant='body1'
-                        >{price} $</Typography>
+                        >{item.price} $</Typography>
                       </Container>
                       <Container style={{paddingLeft: 0}}>
                       <ThemeProvider theme={theme}>
@@ -78,7 +78,7 @@ const Cards = ({id,title,imgSrc,price,toItem}) => {
                       </Container>
                       </CardContent>
                       <Container sx={{mb:2}}>
-                        <Buttons price={price}/>
+                        <Buttons price={price} id={id} addedBeveragesInCart={addedBeveragesInCart}/>
                       </Container>
                     </Card>
                   </Grid>

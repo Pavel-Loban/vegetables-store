@@ -21,17 +21,11 @@ const EggsDairy = () => {
     navigate(`${link}/${id}`)
   }
 
-//   const getItem = (arr,id) => {
-//     navigate(`/${arr}/${id}`)
-//     // console.log(item)
-//   }
-
-
   useEffect(() => {
     axios
       .get(newArr)
       .then((res) => {
-        setEggs(res.data[0].eggs);
+        setEggs(res.data);
         setTimeout(() => {
           setIsLoading(false)
         }, 500)
@@ -57,7 +51,7 @@ const EggsDairy = () => {
               </Container>
               <Grid container spacing={2}>
               {isLoading ? [...new Array(6)].map((item, i) => <SceletonCard key={i} /> )
-        : eggs.map((item) => <Cards {...item} key={item.id} toItem={toItem} />
+        : eggs.map((item) => <Cards item={item} key={item.id} toItem={toItem} />
         )}
                 {/* {!!eggs.length && eggs.map((item) => {
                     return (<Cards {...item} key={item.id}

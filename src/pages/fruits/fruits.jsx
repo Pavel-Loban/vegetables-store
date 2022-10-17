@@ -30,7 +30,7 @@ const Fruits = () => {
     axios
       .get(newArr)
       .then((res) => {
-        setFruits(res.data[0].fruits);
+        setFruits(res.data);
         setTimeout(() => {
           setIsLoading(false)
         }, 500)
@@ -56,7 +56,7 @@ const Fruits = () => {
               </Container>
               <Grid container spacing={2}>
               {isLoading ? [...new Array(6)].map((item, i) => <SceletonCard key={i} /> )
-        : fruits.map((item) => <Cards {...item} key={item.id} toItem={toItem} />
+        : fruits.map((item) => <Cards item={item} key={item.id} toItem={toItem} />
         )}
                 {/* {fruits.map((item) => {
                     return (<Cards {...item} key={item.id}
